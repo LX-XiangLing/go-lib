@@ -49,10 +49,10 @@ func (a *FirebaseAppPush) sendMulticastAndHandlerError(messages *MulticastMessag
 				failedTokens = append(failedTokens, messages.Tokens[idx])
 			}
 		}
-		log.Fatalln("Failed to send message to ", br.FailureCount, " tokens:", failedTokens)
+		log.Println("Failed to send message to ", br.FailureCount, " tokens:", failedTokens)
 		return failedTokens, nil
 	} else {
-		log.Fatalln("Successfully sent message to all tokens:", br.SuccessCount)
+		log.Println("Successfully sent message to all tokens:", br.SuccessCount)
 	}
 	return []string{}, nil
 }
