@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"log"
+	"math"
 
 	firebase "firebase.google.com/go/v4"
 	"google.golang.org/api/option"
@@ -67,7 +68,7 @@ func (a *FirebaseAppPush) divideTokenSendMulticastAndHandlerError(messages *Mult
 		return nil, errors.New("tokens is empty")
 	}
 	for idx := 0; idx < len(messages.Tokens); idx += 500 {
-		submitTokens := messages.Tokens[idx : idx+500]
+		submitTokens := messages.Tokens[idx:int64(math.Min(float64(idx+500), float64(len(messages.Tokens))))]
 		if len(submitTokens) == 0 {
 			continue
 		}
